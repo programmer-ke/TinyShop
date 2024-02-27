@@ -11,7 +11,7 @@ Class {
 	#category : #TinyShop
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 TSPost class >> title: aTitle text: aText [
 	"instantiate post"
 	"scope: class-variables  &  class-instance-variables"	
@@ -22,7 +22,7 @@ TSPost class >> title: aTitle text: aText [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 TSPost class >> title: aTitle text: aText category: aCategory [
 	"instantiate a post"
 	"scope: class-variables  &  class-instance-variables"	
