@@ -12,6 +12,7 @@ Class {
 { #category : #running }
 TSBlogTestCase >> setUp [
 	"Hooks that subclasses may override to define the fixture of test."
+	super setUp.
 	blog := TSBlog current.
 	blog removeAllPosts.
 	
@@ -40,9 +41,31 @@ TSBlogTestCase >> testAllBlogPosts [
 ]
 
 { #category : #tests }
+TSBlogTestCase >> testAllBlogPostsFromCategory [
+	self assert: (blog allBlogPostsFromCategory: 'First Category')
+		size equals: 1
+]
+
+{ #category : #tests }
+TSBlogTestCase >> testAllCategories [
+	blog writeBlogPost: post.
+	self assert: blog allCategories size equals: 2
+]
+
+{ #category : #tests }
 TSBlogTestCase >> testAllVisibleBlogPosts [
 	blog writeBlogPost: post.
 	self assert: blog allVisibleBlogPosts size equals: 1
+]
+
+{ #category : #tests }
+TSBlogTestCase >> testAllVisibleBlogPostsFromCategory [
+	blog writeBlogPost: post.
+	self assert: (blog allVisibleBlogPostsFromCategory: 'First Category')
+		size equals: 0.
+	self assert: (blog allVisibleBlogPostsFromCategory: 'Second Category')
+		size equals: 1
+
 ]
 
 { #category : #tests }
@@ -54,4 +77,10 @@ TSBlogTestCase >> testRemoveAllBlogPosts [
 { #category : #tests }
 TSBlogTestCase >> testSize [
 	self assert: blog size equals: 1
+]
+
+{ #category : #tests }
+TSBlogTestCase >> testUnclassifiedBlogPosts [
+	self assert: (blog allBlogPosts select: [ :p | p isUnclassified ]) size
+		equals: 0
 ]
